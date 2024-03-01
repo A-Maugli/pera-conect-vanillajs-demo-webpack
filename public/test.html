@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Test for @perawallet/connect packed JavaScript library</title>
+  <meta charset="UTF-8">
+  <!--
+  <script type="module" src="./browser/algosdk.min.js"></script>
+  -->
+  <!-- Note: perawalletconnect.min.js contains both pwcsdk and algosdk -->
+  <!--       but algosdk version is v2.1 -->
+  <script type="module" src="./jslib/perawalletconnect.min.js"></script>
+</head>
+
+<body>
+<h2>Test for @perawallet/connect packed JavaScript library</h2>
+<p>Use F12 to see Console</p>
+<p>Expected:</p>
+<p>success: Pera wallet connection created</p>
+<p>success: algod client created</p>
+<script>
+window.onload = function(e) {
+  const pwcsdk = pwc.pwcsdk;
+  const algosdk = pwc.algosdk;
+
+  // Create pera wallet connection
+  try {
+    const peraWallet = new pwcsdk.PeraWalletConnect();
+    console.log('success: Pera wallet connection created');
+  }
+  catch (e) {
+    console.log('error: ',  e);
+  }  
+
+  // Create algod client
+  const token = "";
+  const server = "https://testnet-api.algonode.cloud";
+  const port = 443;
+  try {
+    const client = new algosdk.Algodv2(token, server, port);
+    console.log('success: algod client created');
+  }
+  catch (e) {
+    console.log('error: ', e);
+  }
+}
+</script>
+</body>
+</html>
